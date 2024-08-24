@@ -30,8 +30,27 @@ public class ClienteService {
     public Cliente updateCliente(Long id, Cliente clienteDetails) {
         Cliente cliente = getClienteById(id);
 
-        cliente.setContrasena(clienteDetails.getContrasena());
-        cliente.setEstado(clienteDetails.getEstado());
+        if(clienteDetails.getNombre() != null) {
+            cliente.setNombre(clienteDetails.getNombre());
+        }
+        if(clienteDetails.getGenero() != null) {
+            cliente.setGenero(clienteDetails.getGenero());
+        }
+        if(clienteDetails.getEdad() != null) {
+            cliente.setEdad(clienteDetails.getEdad());
+        }
+        if(clienteDetails.getContrasena() != null) {
+            cliente.setContrasena(clienteDetails.getContrasena());
+        }
+        if(clienteDetails.getEstado() != null) {
+            cliente.setEstado(clienteDetails.getEstado());
+        }
+        if(clienteDetails.getDireccion() != null) {
+            cliente.setDireccion(clienteDetails.getDireccion());
+        }
+        if(clienteDetails.getTelefono() != null) {
+            cliente.setTelefono(clienteDetails.getTelefono());
+        }
 
         return clienteRepository.save(cliente);
     }

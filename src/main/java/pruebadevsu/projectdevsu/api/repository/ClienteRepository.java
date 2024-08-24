@@ -4,5 +4,5 @@ import pruebadevsu.projectdevsu.api.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    // Métodos personalizados si es necesario
+    
 }
