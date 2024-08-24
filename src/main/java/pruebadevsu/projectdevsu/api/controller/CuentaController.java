@@ -23,7 +23,7 @@ public class CuentaController {
 
     @PostMapping
     public Cuenta createCuenta(@RequestBody Cuenta cuenta) {
-        return cuentaService.saveCuenta(cuenta);
+        return cuentaService.createCuenta(cuenta);
     }
 
     @PutMapping("/{id}")

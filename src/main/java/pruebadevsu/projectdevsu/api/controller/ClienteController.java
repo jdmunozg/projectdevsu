@@ -23,7 +23,7 @@ public class ClienteController {
 
     @PostMapping
     public Cliente createCliente(@RequestBody Cliente cliente) {
-        return clienteService.saveCliente(cliente);
+        return clienteService.createCliente(cliente);
     }
 
     @PutMapping("/{id}")

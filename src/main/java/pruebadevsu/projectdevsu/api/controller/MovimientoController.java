@@ -23,7 +23,7 @@ public class MovimientoController {
 
     @PostMapping
     public Movimiento createMovimiento(@RequestBody Movimiento movimiento) {
-        return movimientoService.saveMovimiento(movimiento);
+        return movimientoService.createMovimiento(movimiento);
     }
 
     @PutMapping("/{id}")

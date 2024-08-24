@@ -1,5 +1,6 @@
 package pruebadevsu.projectdevsu.api.service;
 
+import pruebadevsu.projectdevsu.api.exception.ResourceNotFoundException;
 import pruebadevsu.projectdevsu.api.model.Cliente;
 import pruebadevsu.projectdevsu.api.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,26 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente saveCliente(Cliente cliente) {
+    public Cliente getClienteById(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con id: " + id));
+    }
+
+    public Cliente createCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
     public Cliente updateCliente(Long id, Cliente clienteDetails) {
-        Cliente cliente = clienteRepository.findById(id).orElseThrow();
-        cliente.setNombre(clienteDetails.getNombre());
+        Cliente cliente = getClienteById(id);
+
         cliente.setContrasena(clienteDetails.getContrasena());
-        // Actualizar otros campos
+        cliente.setEstado(clienteDetails.getEstado());
+
         return clienteRepository.save(cliente);
     }
 
     public void deleteCliente(Long id) {
-        clienteRepository.deleteById(id);
+        Cliente cliente = getClienteById(id);
+        clienteRepository.delete(cliente);
     }
 }

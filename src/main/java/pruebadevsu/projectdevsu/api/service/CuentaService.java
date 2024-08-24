@@ -3,6 +3,7 @@ package pruebadevsu.projectdevsu.api.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pruebadevsu.projectdevsu.api.exception.ResourceNotFoundException;
 import pruebadevsu.projectdevsu.api.model.Cuenta;
 import pruebadevsu.projectdevsu.api.repository.CuentaRepository;
 
@@ -18,19 +19,27 @@ public class CuentaService {
         return cuentaRepository.findAll();
     }
 
-    public Cuenta saveCuenta(Cuenta cuenta) {
+    public Cuenta getCuentaById(Long id) {
+        return cuentaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada con id: " + id));
+    }
+
+    public Cuenta createCuenta(Cuenta cuenta) {
         return cuentaRepository.save(cuenta);
     }
 
     public Cuenta updateCuenta(Long id, Cuenta cuentaDetails) {
-        Cuenta cuenta = cuentaRepository.findById(id).orElseThrow();
-        cuenta.setNumeroCuenta(cuentaDetails.getNumeroCuenta());
+        Cuenta cuenta = getCuentaById(id);
+
+        cuenta.setTipoCuenta(cuentaDetails.getTipoCuenta());
         cuenta.setSaldoInicial(cuentaDetails.getSaldoInicial());
-        // Actualizar otros campos
+        cuenta.setEstado(cuentaDetails.getEstado());
+
         return cuentaRepository.save(cuenta);
     }
 
     public void deleteCuenta(Long id) {
-        cuentaRepository.deleteById(id);
+        Cuenta cuenta = getCuentaById(id);
+        cuentaRepository.delete(cuenta);
     }
 }
