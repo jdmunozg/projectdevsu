@@ -1,48 +1,22 @@
 package pruebadevsu.projectdevsu.api.model;
+import jakarta.persistence.*;
+import lombok.Data;
 
-import javax.persistence.*;
-
+@Data
 @Entity
 public class Cuenta {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long numeroCuenta;
-    
-    private String tipoCuenta;
-    private double saldoInicial;
-    private String estado;
+    private Long id;
 
-    // Getters y setters
-    public Long getNumeroCuenta() {
-        return numeroCuenta;
-    }
-    
-    public void setNumeroCuenta(Long numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
-    
-    public String getTipoCuenta() {
-        return tipoCuenta;
-    }
-    
-    public void setTipoCuenta(String tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
-    }
-    
-    public double getSaldoInicial() {
-        return saldoInicial;
-    }
-    
-    public void setSaldoInicial(double saldoInicial) {
-        this.saldoInicial = saldoInicial;
-    }
-    
-    public String getEstado() {
-        return estado;
-    }
-    
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    @Column(unique = true)
+    private String numeroCuenta;
+
+    private String tipoCuenta;
+    private Double saldoInicial;
+    private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 }

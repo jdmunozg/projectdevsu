@@ -1,39 +1,15 @@
 package pruebadevsu.projectdevsu.api.model;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class Cliente extends Persona {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clienteId;
-    
-    private String clave;
-    private String estado;
+    @Column(unique = true)
+    private String clienteId;
 
-    // Getters y setters
-    public Long getClienteId() {
-        return clienteId;
-    }
-    
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
-    }
-    
-    public String getClave() {
-        return clave;
-    }
-    
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-    
-    public String getEstado() {
-        return estado;
-    }
-    
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    private String contrasena;
+    private Boolean estado;
 }
